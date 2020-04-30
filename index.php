@@ -14,7 +14,9 @@ $router->map('GET','/','home');
 $router->map('GET','/login','login');
 $router->map('GET','/tables','tables');
 $router->map('GET','/register','register');
-$router->map('GET','/etudiant','etudiant');
+$router->map('POST|GET','/etudiant','etudiant');
+//  $router->map('GET','/update','update');
+$router->map('POST','/update','update');
 $match = $router->match();
 // dd($match);
 

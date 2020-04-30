@@ -64,11 +64,42 @@ $data->execute();
                       <td><?=$result->NumCarte?></td>
                       <td><?=$result->INE?></td>
                       <td><?=$result->Departement?></td>                   
-                      <td><a href="/pages?id=<?=$result->ID?>" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="<?=$result->ID?>">
+                      <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#<?=$result->ID?>">
                             Voir
                           </a>
                       </td>
+                      <div class="modal fade" id="<?=$result->ID?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Etudiant</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="p-4">
+               
+               <div class="card" style="width: 18rem;">
+                   <img src="data:image/jpg;base64,<?=base64_encode($result->Images);?>" class="card-img-top" ></td>
+                       <div class="card-body">    
+                           <h5 class="card-title"> <?=$result->Name?></h5>
+                           <p class="card-text"><?=$result->NumCarte ?></p>
+                           <p class="card-text"><?=$result->INE ?></p>
+                           <p class="card-text"><?=$result->Departement ?></p>     
+                       </div>              
+               </div>
+                    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="/etudiant?id=<?=$result->ID?>"  class="btn btn-primary">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
                     </tr>
+                      
                     <?php endforeach; ?>
                   </tbody>
                 </table>
@@ -79,43 +110,7 @@ $data->execute();
         </div>
  
     
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="p-4">
-               
-                  <?php 
-                  
-                      $info = $pdo->prepare("SELECT * FROM donnees WHERE ID=:id");
-                      $info->fetchAll();
-                      $info->execute(['id'=>($result->ID)]);
-                      foreach($info as $sort):
-                  ?>
-               <div class="card" style="width: 18rem;">
-                   <img src="data:image/jpg;base64,<?=base64_encode($result->Images);?>" class="card-img-top" ></td>
-                       <div class="card-body">    
-                           <h5 class="card-title"> <?=$sort->Name?></h5>
-                           <p class="card-text"><?=$sort->NumCarte ?></p>
-                           <p class="card-text"><?=$sort->INE ?></p>
-                           <p class="card-text"><?=$sort->Departement ?></p>     
-                       </div>              
-               </div>
-                      <?php endforeach;?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="/"  class="btn btn-primary">Save changes</a>
-      </div>
-    </div>
-  </div>
-</div>
+   
       
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
