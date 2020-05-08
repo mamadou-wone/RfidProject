@@ -1,3 +1,23 @@
+<?php
+
+use App\DataBase;
+use App\Login\Auth;
+
+require 'vendor/autoload.php';
+session_start();
+$error = false;
+if (isset($_GET['forbit'])) {
+    $error = true;
+}
+  $pdo = DataBase::getPDO('rfid_user');
+  $auth = new Auth($pdo);
+  if($auth->user() !== null){
+    header('Location: /home');
+    exit();
+  }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +40,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body style="background-clip: ">
 
   <div class="container">
 
@@ -33,18 +53,25 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div >
+              <img src="galsen.png" alt="" width="450px" height="450px" class="p-4"> 
+              </div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                          <?php if($error):?>
+                            <div class="alert alert-danger">
+                                <h6>Pseudo ou mot de Passe incorrect</h6>
+                            </div>
+                          <?php endif;?>                    
                   </div>
-                  <form class="user">
+                  <form class="user" action="/login2" method="POST">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="text" class="form-control form-control-user"  aria-describedby="emailHelp" placeholder="Enter your Pseudo" name="pseudo" required> 
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" placeholder="Password" name="password" required>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -52,24 +79,17 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
                       Login
-                    </a>
+                    </button>
                     <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a>
+                    
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                    <a class="small" href="#">Forgot Password?</a>
                   </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
-                  </div>
+                  
                 </div>
               </div>
             </div>

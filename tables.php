@@ -4,7 +4,10 @@ use App\DataBase;
 use App\Fonction;
 
 require 'vendor/autoload.php';
-require('header.php'); 
+
+require 'header.php'; 
+
+$id_modal = [];
 
 $pdo=DataBase::getPDO('rfid_user');
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE , PDO::FETCH_OBJ);
@@ -41,8 +44,12 @@ $data->execute();
                       <th>NumCarte</th>
                       <th>INE</th>
                       <th>Département</th>
-                      <th>Action</th>
-                   
+                      <th>Update</th>
+                     
+                      <?php if(isset($_GET['del'])){
+                        echo "<th>Delete</th>";
+                      }
+                    ?>
                     </tr>
                   </thead>
                   <tfoot>
@@ -52,7 +59,11 @@ $data->execute();
                     <th>NumCarte</th>
                     <th>INE</th>
                     <th>Département</th>
-                    <th>Action</th>
+                    <th>Update</th>
+                    <?php if(isset($_GET['del'])){
+                        echo "<th>Delete</th>";
+                      }
+                    ?>
                   
                     </tr>
                   </tfoot>
@@ -64,11 +75,22 @@ $data->execute();
                       <td><?=$result->NumCarte?></td>
                       <td><?=$result->INE?></td>
                       <td><?=$result->Departement?></td>                   
-                      <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#<?=$result->ID?>">
+                      <td><a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#<?=$result->INE?>">
                             Voir
                           </a>
+                      </td>                       
+                    <?php if(isset($_GET['del'])):
+
+                    ?>
+                       <td>
+                        <form action="/delete?ine=<?= $result->INE?>" method="post">
+                          
+                          <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Etes vous sur de supprimer?')">Delete</button>
+                        </form>
                       </td>
-                      <div class="modal fade" id="<?=$result->ID?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <?php endif ;?>
+
+<div class="modal fade" id="<?=$result->INE?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,24 +99,25 @@ $data->execute();
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-      <div class="p-4">
-               
-               <div class="card" style="width: 18rem;">
-                   <img src="data:image/jpg;base64,<?=base64_encode($result->Images);?>" class="card-img-top" ></td>
-                       <div class="card-body">    
-                           <h5 class="card-title"> <?=$result->Name?></h5>
-                           <p class="card-text"><?=$result->NumCarte ?></p>
-                           <p class="card-text"><?=$result->INE ?></p>
-                           <p class="card-text"><?=$result->Departement ?></p>     
-                       </div>              
-               </div>
-                    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="/etudiant?id=<?=$result->ID?>"  class="btn btn-primary">Update</a>
-      </div>
+        <div class="modal-body">
+          <div class="p-4">
+                  
+            <div class="card" style="width: 18rem;">
+              <img src="data:image/jpg;base64,<?=base64_encode($result->Images);?>" class="card-img-top" >
+                <div class="card-body">    
+                    <h5 class="card-title"><strong><label for="">Nom:</label></strong> <?=$result->Name?></h5>
+                    <p class="card-text"><strong><label for="">NumCarte:</label></strong> <?=$result->NumCarte ?></p>
+                    <p class="card-text"><strong><label for="">INE:</label></strong> <?=$result->INE ?></p>
+                    <p class="card-text"><strong><label for="">Département:</label> </strong><?=$result->Departement ?></p>     
+                </div>              
+            </div>
+                  
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a href="/etudiant?id=<?=$result->ID?>"  class="btn btn-primary">Update</a>
+            </div>
+        </div>
     </div>
   </div>
 </div>
@@ -133,24 +156,7 @@ $data->execute();
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
