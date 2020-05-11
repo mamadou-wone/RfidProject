@@ -13,8 +13,7 @@ class Action{
                  'image'=>$image,
                  'role'=>$role,
                  'password'=>$password   
-            ]);
-     
+            ]);    
         
 }
     
@@ -28,6 +27,17 @@ class Action{
       
         
 }
+
+    public static function ChangeRoleAdmin($dbname , $role ,$pseudo)
+    {
+        $request = DataBase::getPDO($dbname)->prepare("UPDATE user SET role =:role WHERE pseudo =:pseudo");
+        $request ->execute([
+            'role'=>$role,
+            'pseudo'=>$pseudo
+        ]);
+    }
+
+    
     public static function Delete($dbname, $ine)
     {
         $request = DataBase::getPDO($dbname)->prepare("DELETE FROM donnees WHERE INE =:ine");

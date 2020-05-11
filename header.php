@@ -11,9 +11,11 @@ $pdo->setFetchMode(PDO::FETCH_OBJ);
 $pdo->execute(['pseudo'=>$pseudo]);
 $user = $pdo->fetch();
 
-$pdo2 = DataBase::getPDO('rfid_user');
-$auth = new Auth($pdo2);
-$user2 = $auth->user();
+$role = $user->role;
+$root = 'root';
+// $pdo2 = DataBase::getPDO('rfid_user');
+// $auth = new Auth($pdo2);
+// $user2 = $auth->user();
 
 
 
@@ -69,6 +71,10 @@ $user2 = $auth->user();
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
+
+   
+  
+  
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
@@ -82,22 +88,27 @@ $user2 = $auth->user();
           </div>
         </div>
       </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Settings</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Actions</h6>
-            <a class="collapse-item" href="/admin">Administrateurs</a>
-            <a class="collapse-item" href="/tables?del=64584152">Delete</a>
-          </div>
-        </div>
-      </li>
-
+  
+      <?php if($role === 'root'):?>   
+       <!-- Nav Item - Utilities Collapse Menu -->  
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+              <i class="fas fa-fw fa-wrench"></i>
+              <span>Settings</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">            
+                <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Actions</h6>
+                  <form action="/admin" method="post">
+                    <button type="submit" class="btn btn-light" >Administrateurs</button>
+                  </form>
+                  <form action="/tables?del=64584152" method="post">
+                    <button type="submit" class="btn btn-light" >Delete</button>
+                  </form>
+                </div>             
+            </div>
+          </li>
+      <?php endif; ?>   
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -107,12 +118,13 @@ $user2 = $auth->user();
       </div>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="/tables">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-
+      <form action="/tables" method="post">
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fas fa-fw fa-table"></i>     
+            <button type="submit" class="btn btn-primary">Tables</button></a>   
+        </li>
+      </form>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

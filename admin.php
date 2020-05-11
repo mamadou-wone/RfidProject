@@ -90,12 +90,24 @@ $data->execute();
                       
                 </div>              
             </div>
-                  
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <a href="/etudiant?id="  class="btn btn-primary">Update</a>
-            </div>
+            <hr>
+                  <form action="/updateadmin?pseudo=<?=$resulut->pseudo ?>" method="post">
+                  <div class="form-group">
+                            <select class="form-control" name="select" id="select" required>
+                                <option value="" disabled selected>Changer le rôle</option>
+                                <option value="root" >root</option>
+                                <option value="admin">admin</option>
+                            </select>
+                        </div>
+                            
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit"  class="btn btn-primary">Update</button>
+                      </div>
+
+                  </form>
+                        
         </div>
     </div>
   </div>
