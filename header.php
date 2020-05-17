@@ -30,6 +30,8 @@ $root = 'root';
   <meta name="description" content="">
   <meta name="author" content="">
   <title>WONE - Dashboard</title>
+  <script src="https://kit.fontawesome.com/2fe62f2d4f.js" crossorigin="anonymous"></script>
+  
   <!-- Custom fonts for this template-->
   <!-- vendor/fontawesome-free/css/all.min.css -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -100,7 +102,7 @@ $root = 'root';
                 <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">Actions</h6>
                   <form action="/admin" method="post">
-                    <button type="submit" class="btn btn-light" >Administrateurs</button>
+                    <a href="/admin" type="submit" class="collapse-item" >Administrateurs</a>
                   </form>
                   <form action="/tables?del=64584152" method="post">
                     <button type="submit" class="btn btn-light" >Delete</button>
@@ -118,13 +120,13 @@ $root = 'root';
       </div>
 
       <!-- Nav Item - Tables -->
-      <form action="/tables" method="post">
+      
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="/tables">
             <i class="fas fa-fw fa-table"></i>     
-            <button type="submit" class="btn btn-primary">Tables</button></a>   
+           Tables<a>   
         </li>
-      </form>
+    
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

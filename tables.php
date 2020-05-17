@@ -108,15 +108,32 @@ $data->execute();
                     <h5 class="card-title"><strong><label for="">Nom:</label></strong> <?=$result->Name?></h5>
                     <p class="card-text"><strong><label for="">NumCarte:</label></strong> <?=$result->NumCarte ?></p>
                     <p class="card-text"><strong><label for="">INE:</label></strong> <?=$result->INE ?></p>
-                    <p class="card-text"><strong><label for="">Département:</label> </strong><?=$result->Departement ?></p>     
+                    <p class="card-text"><strong><label for="">Département:</label> </strong><?=$result->Departement ?></p>
+                    <p class="card-text"><strong><label for="">Niveau:</label> </strong><?=$result->niveau ?></p>      
                 </div>              
             </div>
-                  
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <a href="/etudiant?id=<?=$result->ID?>"  class="btn btn-primary">Update</a>
-            </div>
+            <hr>
+            <form action="/etudiant?user=<?=$result->ID?>" method="post">
+                <div class="form-group">
+                    <select class="form-control" name="select" id="select" required>
+                        <option value="" disabled selected><?=$result->niveau ?></option>
+                        <option value="licence 1" >Licence 1</option>
+                        <option value="licence 2">Licence 2</option>
+                        <option value="licence 3">Licence 3</option>
+                        <option value="Master 1">Master 1</option>
+                        <option value="Master 2">Master 2</option>
+                    </select>
+                    <?php if($role === 'root'): ?>
+                    <br>
+                    <a href="/etudiant?id=<?=$result->ID?>"  class="btn btn-primary">Update</a>
+                    <?php endif; ?>  
+                  </div>             
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+             </form>
         </div>
     </div>
   </div>
@@ -134,9 +151,11 @@ $data->execute();
  
     
    
-      
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+     
+
+    </div>
+     <!-- Footer -->
+     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; wone 2020</span>
@@ -144,8 +163,6 @@ $data->execute();
         </div>
       </footer>
       <!-- End of Footer -->
-
-    </div>
     <!-- End of Content Wrapper -->
 
   </div>

@@ -103,7 +103,15 @@ if (!empty($_POST)  && isset($_POST['select'])) {
 </div>
 </div>
 
-
+ <!-- Footer -->
+ <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; wone 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
 
 
 <a class="scroll-to-top rounded" href="#page-top">

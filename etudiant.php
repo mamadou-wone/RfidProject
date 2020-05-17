@@ -6,7 +6,17 @@ use App\DataBase;
 require 'header.php';
 require 'vendor/autoload.php';
 
-
+if(isset($_POST['select'])){
+  $niveau = $_POST['select'];
+  $id = $_GET['user'];
+  $pdo = DataBase::getPDO('rfid_user')->prepare("UPDATE donnees SET niveau=:niveau WHERE ID=:id");
+  $pdo->execute([
+    'niveau'=>$niveau,
+    'id'=>$id]);
+  header('Location: /tables');
+  exit();
+  
+}
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
