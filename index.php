@@ -5,9 +5,6 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 $routeur = new AltoRouter();
-
-
-
 $router = new AltoRouter();
 
 $router->map('GET','/','login');
