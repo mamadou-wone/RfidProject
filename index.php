@@ -18,6 +18,7 @@ $router->map('POST|GET','/registeradmin','registeradmin');
 $router->map('POST|GET','/admin','admin');
 $router->map('POST','/delete','delete');
 $router->map('POST','/update','update');
+$router->map('GET','/profil','profil');
 $router->map('GET','/logout','logout');
 $match = $router->match();
 // dd($match);
@@ -27,6 +28,8 @@ if($match !== null){
     if(is_callable($match['target'])){
         call_user_func_array($match['target'], $match['params']);
     }elseif ($match['target'] === 'home') {
+        require "{$match['target']}.php";
+    }elseif ($match['target'] === 'profil') {
         require "{$match['target']}.php";
     }elseif ($match['target'] === 'updateadmin') {
         require "{$match['target']}.php";

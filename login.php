@@ -1,5 +1,5 @@
 <?php
-//jdsn
+
 use App\DataBase;
 use App\Login\Auth;
 
@@ -7,14 +7,14 @@ require 'vendor/autoload.php';
 session_start();
 $error = false;
 if (isset($_GET['forbit'])) {
-    $error = true;
+  $error = true;
 }
-  $pdo = DataBase::getPDO('rfid_user');
-  $auth = new Auth($pdo);
-  if($auth->user() !== null){
-    header('Location: /home');
-    exit();
-  }
+$pdo = DataBase::getPDO('rfid_user');
+$auth = new Auth($pdo);
+if ($auth->user() !== null) {
+  header('Location: /home');
+  exit();
+}
 
 
 ?>
@@ -53,22 +53,22 @@ if (isset($_GET['forbit'])) {
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div >
-              <img src="galsen.png" alt="" width="450px" height="450px" class="p-4"> 
+              <div>
+                <img src="galsen.png" alt="" width="450px" height="450px" class="p-4">
               </div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                          <?php if($error):?>
-                            <div class="alert alert-danger">
-                                <h6>Pseudo ou mot de Passe incorrect</h6>
-                            </div>
-                          <?php endif;?>                    
+                    <?php if ($error) : ?>
+                      <div class="alert alert-danger">
+                        <h6>Pseudo ou mot de Passe incorrect</h6>
+                      </div>
+                    <?php endif; ?>
                   </div>
                   <form class="user" action="/login2" method="POST">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user"  aria-describedby="emailHelp" placeholder="Enter your Pseudo" name="pseudo" required> 
+                      <input type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Enter your Pseudo" name="pseudo" required>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" placeholder="Password" name="password" required>
@@ -83,13 +83,13 @@ if (isset($_GET['forbit'])) {
                       Login
                     </button>
                     <hr>
-                    
+
                   </form>
                   <hr>
                   <div class="text-center">
                     <a class="small" href="#">Forgot Password?</a>
                   </div>
-                  
+
                 </div>
               </div>
             </div>

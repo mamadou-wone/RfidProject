@@ -37,7 +37,7 @@ class Auth{
                 if ($user === false) {
                     return null;
                 }
-                if (password_verify($password , $user->getPassword())) {
+                if (password_verify($password , $user->getPassword()) && $user->getRole() !== 'bloquer') {
                     if (session_status() === PHP_SESSION_NONE) {
                         session_start();
                     }

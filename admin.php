@@ -97,6 +97,7 @@ $data->execute();
                                 <option value="" disabled selected>Changer le rôle</option>
                                 <option value="root" >root</option>
                                 <option value="admin">admin</option>
+                                <option value="bloquer">bloquer</option>
                             </select>
                         </div>
                             
