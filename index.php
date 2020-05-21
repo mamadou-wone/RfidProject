@@ -18,7 +18,7 @@ $router->map('POST|GET','/registeradmin','registeradmin');
 $router->map('POST|GET','/admin','admin');
 $router->map('POST','/delete','delete');
 $router->map('POST','/update','update');
-$router->map('GET','/profil','profil');
+$router->map('POST|GET','/profil','profil');
 $router->map('GET','/logout','logout');
 $match = $router->match();
 // dd($match);

@@ -1,5 +1,5 @@
 <?php
-namespace App\Login;
+namespace App\Admin;
 
 use App\DataBase;
 use PDO;
