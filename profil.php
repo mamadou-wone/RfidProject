@@ -1,10 +1,8 @@
 <?php
-
 use App\DataBase;
 use App\Admin\Admin;
 
 require 'header.php';
-//
 if (!empty($_POST) && !empty($_FILES)) {
   $image= base64_encode(file_get_contents(addslashes( $_FILES['image']['tmp_name'])));
 $pdo = Admin::changeData($_POST['name'],$_POST['pseudo'],$image,$_SESSION['user']);
@@ -12,11 +10,6 @@ $pdo = Admin::changeData($_POST['name'],$_POST['pseudo'],$image,$_SESSION['user'
 
 
 ?>
-
-
-
-
-
 
 
 <div class="container">
