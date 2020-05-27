@@ -10,8 +10,6 @@ $pdo = Admin::changeData($_POST['name'],$_POST['pseudo'],$image,$_SESSION['user'
 
 
 ?>
-
-
 <div class="container">
 <div class="card o-hidden border-0 shadow-lg my-5">
   <div class="card-body p-0">
